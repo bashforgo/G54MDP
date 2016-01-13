@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bottom_sheet_bg"
+
+                android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/dialogInstruction"
+
+        style="@style/DialogInstruction"
+
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        />
+
+    <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
+        android:id="@+id/selectorList"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_above="@+id/selectorCancel"
+        android:layout_below="@id/dialogInstruction"
+        />
+
+    <hu.devo.bastet.ui.IconRippleButton
+        android:id="@+id/selectorCancel"
+
+        style="@style/DialogButton"
+
+        android:layout_alignParentBottom="true"
+
+        android:textAlignment="center"
+        />
+</RelativeLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bottom_sheet_bg"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/add_dialog_padding_vertical"
+              android:paddingTop="@dimen/add_dialog_padding_vertical"
+    >
+    <TextView
+        android:id="@+id/dialogInstruction"
+        style="@style/DialogInstruction"
+        />
+
+    <hu.devo.bastet.ui.IconRippleButton
+        android:id="@+id/dialogButton1"
+        style="@style/DialogButton"
+        />
+
+    <hu.devo.bastet.ui.IconRippleButton
+        android:id="@+id/dialogButton2"
+        style="@style/DialogButton"
+        />
+
+</LinearLayout>

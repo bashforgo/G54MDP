@@ -1,0 +1,81 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.hugo'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "hu.devo.bastet"
+        minSdkVersion 19
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+
+    //main activity layout
+    compile project(':libs:SlidingMenuFix')
+
+    //material design ui
+    //noinspection GradleDependency
+    compile 'com.android.support:design:23.1.0'
+    //noinspection GradleDependency
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    //noinspection GradleDependency
+    compile 'com.android.support:cardview-v7:23.1.0'
+    compile 'com.github.rey5137:material:1.2.1'
+
+    //material icons
+    compile 'com.joanzapata.iconify:android-iconify-material:2.1.0'
+
+    //morphing buttons
+    compile 'com.wnafee:vector-compat:1.0.5'
+
+    //easier layout manipulation
+    compile 'com.jakewharton:butterknife:7.0.1'
+
+    //better seekbar
+    compile 'org.adw.library:discrete-seekbar:1.0.0'
+
+    //locked aspect ratio container in playlist dialog
+    compile 'com.marvinlabs:android-constrained-widgets:1.2.0@aar'
+
+    //nicer logging
+    compile 'com.github.orhanobut:logger:1.12'
+
+    //manipulable list dialog
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.nhaarman.listviewanimations:lib-core:3.1.0@aar'
+    compile 'com.nhaarman.listviewanimations:lib-manipulation:3.1.0@aar'
+
+    //image loading and caching
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+
+    //json parsing from spotify
+    compile 'com.google.code.gson:gson:2.5'
+
+    //easier database management with dbflow
+    apt 'com.raizlabs.android:DBFlow-Compiler:2.2.1'
+    compile 'com.raizlabs.android:DBFlow-Core:2.2.1'
+    compile 'com.raizlabs.android:DBFlow:2.2.1'
+}
+
+repositories {
+    maven { url "http://jzaccone.github.io/SlidingMenu-aar" }
+    maven { url "https://jitpack.io" }
+}
+
+

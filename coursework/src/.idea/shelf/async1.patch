@@ -1,0 +1,145 @@
+Index: app/src/main/java/hu/devo/bastet/Music.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/hu/devo/bastet/Music.java	(date 1448419352000)
++++ app/src/main/java/hu/devo/bastet/Music.java	(revision )
+@@ -9,6 +9,7 @@
+ import android.media.MediaMetadataRetriever;
+ import android.net.Uri;
+ import android.nfc.FormatException;
++import android.os.AsyncTask;
+ import android.provider.DocumentsContract;
+ import android.provider.MediaStore;
+ import android.widget.ImageView;
+@@ -175,9 +176,15 @@
+ 
+     public class AlbumArtStorage {
+ 
+-        public boolean isUri;
+-        public String uri;
+-        public File file;
++        protected boolean isUri;
++        protected String uri;
++        protected File file;
++
++        protected boolean loadOnFill;
++        protected boolean filled;
++        protected ImageView view;
++        protected Context context;
++
+         public AlbumArtStorage(File file) {
+             isUri = false;
+             this.file = file;
+@@ -226,13 +233,25 @@
+         }
+ 
+         // TODO: 21/11/2015 load this on a worker thread, refer to snippets
++        @DebugLog
+         public void loadIntoView(Context ctx, ImageView iv) {
++            if (filled) {
+-            if (isUri) {
+-                Picasso.with(ctx).load(uri).into(iv);
+-            } else {
+-                Picasso.with(ctx).load(file).into(iv);
+-            }
++                if (isUri) {
++                    Picasso.with(ctx).load(uri).into(iv);
++                } else {
++                    Picasso.with(ctx).load(file).into(iv);
++                }
++                if (loadOnFill) {
++                    loadOnFill = false;
++                    context = null;
++                    view = null;
+-        }
++                }
++            } else {
++                loadOnFill = true;
++                context = ctx;
++                view = iv;
++            }
++        }
+ 
+         protected void fill() {
+             fill(-1);
+@@ -240,33 +259,52 @@
+ 
+         @DebugLog
+         protected void fill(long albumId) {
++            fillerTask.execute(albumId);
++        }
++
++        protected AsyncTask<Long, Void, Void> fillerTask = new AsyncTask<Long, Void, Void>() {
++            @DebugLog
++            @Override
++            protected Void doInBackground(Long... albumId) {
+-            boolean success = false;
+-            int i = 0;
++                boolean success = false;
++                int i = 0;
+-            if (albumId == -1) {
++                if (albumId[0] == -1) {
+-                //skip content resolver search
+-                i = 1;
+-            }
+-            for (; i < 3 && !success; i++) {
+-                switch (i) {
+-                    case 0:
+-//                        Logger.i("trying to fill from content resolver");
++                    //skip content resolver search
++                    i = 1;
++                }
++                for (; i < 3 && !success; i++) {
++                    switch (i) {
++                        case 0:
++                            //                        Logger.i("trying to fill from content resolver");
+-                        success = fillFromContentResolver(albumId);
++                            success = fillFromContentResolver(albumId[0]);
+-                        break;
+-                    case 1:
+-//                        Logger.i("trying to fill from file");
+-                        success = fillFromMetaRetriever();
+-                        break;
+-                    case 2:
+-//                        Logger.i("no art found, filling from spotify");
+-                        fillFromSpotify();
+-                        break;
+-                    default:
+-                        Logger.e("this really shouldn't happen");
+-                        break;
+-                }
+-            }
++                            break;
++                        case 1:
++                            //                        Logger.i("trying to fill from file");
++                            success = fillFromMetaRetriever();
++                            break;
++                        case 2:
++                            //                        Logger.i("no art found, filling from spotify");
++                            fillFromSpotify();
++                            break;
++                        default:
++                            Logger.e("this really shouldn't happen");
++                            break;
++                    }
++                }
++                return null;
++            }
+ 
++            @DebugLog
++            @Override
++            protected void onPostExecute(Void aVoid) {
++                super.onPostExecute(aVoid);
++
++                filled = true;
++                if (loadOnFill && context != null && view != null) {
++                    loadIntoView(context,view);
+-        }
++                }
++            }
++        };
+ 
+         protected boolean fillFromContentResolver(long albumId) {
+             try {

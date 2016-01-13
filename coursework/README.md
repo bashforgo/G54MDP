@@ -1,0 +1,4 @@
+# G54MDP coursework
+* Grade: 94 / 100
+* Comments:
+>This is a very accomplished implementation of the required functionality, with lots of additions. The user can select a track and it plays correctly via the service in the background, with appropriate use of the notification for both interaction and at the correct points in the lifecycle. The only minor criticism of the architecture might be passing the service object via the binder rather than having a more well defined interface. The views and activities are well designed to support the task, as well as the additional effort of the UI design and implementation. The use of storage is excellent both in querying the content provider and filesystem, and the storage of playlists. Excellent extension of querying spotify for album art. The code is clear and well commented throughout.

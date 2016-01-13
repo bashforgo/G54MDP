@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Bastet Music Player</string>
+    <string name="album_art_desc">Album Art</string>
+    <string name="empty_playlist">You have nothing in your playlist, go add something below.</string>
+    <string name="empty_list_image_description">Broken CD</string>
+</resources>

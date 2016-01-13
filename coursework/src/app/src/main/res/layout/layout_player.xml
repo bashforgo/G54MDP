@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--container-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+    <!-- centered background album art -->
+    <ImageView
+        android:id="@+id/albumArtBg"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        />
+
+    <!-- container for top buttons -->
+    <!-- padded so the backdrop extends more over the album art -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+
+        android:background="@drawable/backdrop_top"
+        android:paddingBottom="@dimen/top_button_size"
+        >
+
+        <!-- morphing button for sliding out the list menu -->
+        <hu.devo.bastet.ui.MorphingRippleButton
+            android:id="@+id/menuButton"
+            style="@style/TopButton"
+            android:layout_marginStart="@dimen/top_button_margin"
+
+            android:padding="4dp"
+            app:vc_endDrawable="@drawable/ic_arrow_to_drawer"
+
+            app:vc_startDrawable="@drawable/ic_drawer_to_arrow"
+            />
+
+        <!-- simple button for sharing the played track-->
+        <hu.devo.bastet.ui.IconRippleButton
+            android:id="@+id/share"
+
+            style="@style/TopButton"
+
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/top_button_margin"
+
+            android:text="{md-share 36dp}"
+            />
+
+
+    </RelativeLayout>
+    <!-- end top -->
+
+    <!-- container for the bottom controls and track info -->
+    <!-- padded so the backdrop extends more over the album art -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:background="@drawable/backdrop_bottom"
+
+        android:orientation="vertical"
+        android:paddingTop="@dimen/top_button_size"
+        >
+
+        <!-- container for track info -->
+        <LinearLayout
+            android:id="@+id/info"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <!-- track title -->
+            <TextView
+                android:id="@+id/trackTitle"
+
+                style="@style/InfoTextStyle"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+
+                android:textStyle="bold"
+                />
+
+            <!-- artist -->
+            <TextView
+                android:id="@+id/artist"
+
+                style="@style/InfoTextStyle"
+                android:layout_marginBottom="@dimen/track_info_margin"
+
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                />
+
+        </LinearLayout>
+        <!-- end track info -->
+
+        <!-- container for controls -->
+        <LinearLayout
+            android:id="@+id/controls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <!-- container for timing info and seekbar -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <!-- current time -->
+                <TextView
+                    android:id="@+id/currentTime"
+
+                    style="@style/TimingTextStyle"
+
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/time_text_side_margin"
+                    />
+
+                <!-- materialish seekbar -->
+                <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+                    android:id="@+id/seeker"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/currentTime"
+                    android:layout_toStartOf="@+id/trackLength"
+
+                    app:dsb_allowTrackClickToDrag="true"
+                    app:dsb_max="100"
+                    app:dsb_min="0"
+                    app:dsb_value="0"
+                    />
+
+                <!-- track length -->
+                <TextView
+                    android:id="@+id/trackLength"
+
+                    style="@style/TimingTextStyle"
+
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/time_text_side_margin"
+                    />
+
+
+            </RelativeLayout>
+            <!-- end timing -->
+
+            <!-- list control container -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                >
+
+                <!-- left margin spacer -->
+                <android.support.v4.widget.Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    />
+
+                <!-- simple button for skipping and seeking -->
+                <hu.devo.bastet.ui.IconRippleButton
+                    android:id="@+id/prev"
+
+                    style="@style/BottomButton"
+
+                    android:text="{md-fast-rewind @dimen/bottom_button_icon_size}"
+                    />
+
+                <!-- spacer between button and play button-->
+                <android.support.v4.widget.Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+
+                <!-- play button -->
+                <hu.devo.bastet.ui.MorphingRippleButton
+                    android:id="@+id/play"
+
+                    style="@style/PlayButton"
+                    app:vc_endDrawable="@drawable/ic_pause_to_play"
+
+                    app:vc_startDrawable="@drawable/ic_play_to_pause"
+                    />
+
+                <!-- spacer between button and play button-->
+                <android.support.v4.widget.Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+
+                <!-- button for skipping and seeking -->
+                <hu.devo.bastet.ui.IconRippleButton
+                    android:id="@+id/next"
+
+                    style="@style/BottomButton"
+
+                    android:text="{md-fast-forward @dimen/bottom_button_icon_size}"
+                    />
+
+                <!-- right margin spacer -->
+                <android.support.v4.widget.Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    />
+
+            </LinearLayout>
+            <!-- end list control -->
+
+        </LinearLayout>
+        <!-- end all controls-->
+
+    </LinearLayout>
+    <!-- end bottom-->
+
+</FrameLayout>

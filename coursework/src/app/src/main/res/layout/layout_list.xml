@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <com.marvinlabs.widget.aspectratio.ConstrainedFrameLayout
+        android:id="@+id/nowPlaying"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:aspectRatioHeight="9"
+        app:aspectRatioWidth="21"
+        app:fixedDimension="width"
+        >
+        <ImageView
+            android:id="@+id/secondaryArtBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+
+            android:background="@drawable/backdrop_bottom"
+            android:paddingBottom="@dimen/top_button_margin"
+            android:paddingLeft="@dimen/top_button_margin">
+
+            <LinearLayout
+                android:id="@+id/secondaryInfo"
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+
+                android:layout_toStartOf="@+id/secondaryPlay"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Now Playing:"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                    />
+
+                <TextView
+                    android:id="@+id/secondaryTitle"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                    />
+
+                <TextView
+                    android:id="@+id/secondaryArtist"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                    />
+
+            </LinearLayout>
+
+            <hu.devo.bastet.ui.MorphingRippleButton
+                android:id="@+id/secondaryPlay"
+
+                style="@style/RoundFlatButton"
+                android:layout_width="@dimen/bottom_button_size"
+
+                android:layout_height="@dimen/bottom_button_size"
+                android:layout_alignParentEnd="true"
+
+                android:layout_alignParentTop="true"
+                app:vc_endDrawable="@drawable/ic_pause_to_play"
+
+                app:vc_startDrawable="@drawable/ic_play_to_pause"
+                />
+
+        </RelativeLayout>
+    </com.marvinlabs.widget.aspectratio.ConstrainedFrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_above="@+id/button_container"
+        android:layout_below="@+id/nowPlaying"
+        android:layout_gravity="center_horizontal"
+        >
+
+        <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
+            android:id="@+id/listView"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            />
+
+        <RelativeLayout
+            android:id="@+id/empty_view"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            android:visibility="gone"
+            >
+
+            <ImageView
+                android:id="@+id/empty_image"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_above="@+id/empty_text"
+
+                android:contentDescription="@string/empty_list_image_description"
+
+                android:scaleType="centerInside"
+                android:src="@drawable/empty"
+                />
+
+            <TextView
+                android:id="@+id/empty_text"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentBottom="true"
+                android:padding="@dimen/empty_text_padding"
+
+                android:text="@string/empty_playlist"
+
+                android:textAlignment="center"
+                />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
+
+        android:layout_height="@dimen/list_button_height"
+        android:layout_alignParentBottom="true"
+        android:background="#33000000"
+
+        android:gravity="top"
+
+        android:orientation="horizontal"
+        >
+
+        <hu.devo.bastet.ui.IconRippleButton
+            android:id="@+id/add"
+
+            style="@style/ListButton"
+
+            android:text="{md-playlist-add @dimen/list_button_size}"
+            />
+
+        <hu.devo.bastet.ui.IconRippleButton
+            android:id="@+id/save"
+
+            style="@style/ListButton"
+
+            android:text="{md-save @dimen/list_button_size}"
+            />
+
+        <hu.devo.bastet.ui.IconRippleButton
+            android:id="@+id/load"
+
+            style="@style/ListButton"
+
+            android:text="{md-restore @dimen/list_button_size}"
+            />
+
+        <hu.devo.bastet.ui.IconRippleButton
+            android:id="@+id/shuffle"
+
+            style="@style/ListButton"
+
+            android:text="{md-shuffle @dimen/list_button_size}"
+            />
+
+    </LinearLayout>
+</RelativeLayout>

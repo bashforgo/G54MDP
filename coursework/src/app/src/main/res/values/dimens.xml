@@ -1,0 +1,33 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="sliding_offset">64dp</dimen>
+    <dimen name="shadow_width">16dp</dimen>
+    <dimen name="top_button_size">48dp</dimen>
+    <dimen name="top_button_margin">8dp</dimen>
+    <dimen name="bottom_button_size">72dp</dimen>
+    <dimen name="bottom_button_icon_size">64dp</dimen>
+    <dimen name="play_button_size">80dp</dimen>
+    <dimen name="time_text_side_margin">12dp</dimen>
+    <dimen name="corner_radius">100dp</dimen>
+    <dimen name="nil">0dp</dimen>
+    <dimen name="max_ripple_radius">30dp</dimen>
+    <dimen name="list_button_size">36dp</dimen>
+    <dimen name="list_button_height">44dp</dimen>
+    <dimen name="empty_text_padding">12dp</dimen>
+    <dimen name="list_item_padding">6dp</dimen>
+    <dimen name="item_artist_bottom_padding">4dp</dimen>
+    <dimen name="item_art_size">60dp</dimen>
+    <dimen name="item_art_margin">8dp</dimen>
+    <dimen name="item_small_art_size">26dp</dimen>
+    <dimen name="item_small_art_margin">2dp</dimen>
+    <dimen name="duration_margin">4dp</dimen>
+    <dimen name="track_info_margin">16dp</dimen>
+    <dimen name="add_dialog_padding_vertical">12dp</dimen>
+    <dimen name="add_dialog_text_padding_horizontal">22dp</dimen>
+    <dimen name="add_dialog_text_padding_vertical">16dp</dimen>
+    <dimen name="add_dialog_button_padding_horizontal">34dp</dimen>
+    <dimen name="add_dialog_button_padding_vertical">14dp</dimen>
+    <dimen name="music_selector_done_padding_vertical">16dp</dimen>
+</resources>

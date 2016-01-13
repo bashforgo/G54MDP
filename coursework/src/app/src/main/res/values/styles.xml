@@ -1,0 +1,140 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_d_2</item>
+        <item name="colorAccent">@color/secondary</item>
+        <item name="morphButtonStyle">@style/Widget.AppCompat.Button.Borderless</item>
+        <item name="discreteSeekBarStyle">@style/SeekBarStyle</item>
+    </style>
+
+    <style name="FlatButton">
+        <item name="android:gravity">center</item>
+        <!-- color for simple buttons -->
+        <item name="android:textColor">@color/button_color_states</item>
+        <item name="android:textColorPrimaryDisableOnly">@color/white_more_alpha</item>
+        <!-- color for morphing buttons -->
+        <item name="vc_foregroundTint">@color/button_color_states</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Button</item>
+
+        <item name="android:background">@null</item>
+    </style>
+
+
+    <style name="RoundFlatButton" parent="FlatButton">
+        <item name="rd_style">@style/RoundRipple</item>
+    </style>
+
+    <style name="RoundRipple" parent="Material.Drawable.Ripple.Touch.MatchView">
+        <item name="rd_cornerRadius">@dimen/corner_radius</item>
+        <item name="rd_maxRippleRadius">@dimen/max_ripple_radius</item>
+    </style>
+
+    <style name="RectangleFlatButton" parent="FlatButton">
+        <item name="rd_style">@style/RectangleRipple</item>
+    </style>
+
+    <style name="RectangleRipple" parent="Material.Drawable.Ripple.Touch.MatchView">
+        <item name="rd_cornerRadius">@dimen/nil</item>
+        <item name="rd_maxRippleRadius">@dimen/max_ripple_radius</item>
+    </style>
+
+
+    <style name="TopButton" parent="RoundFlatButton">
+        <item name="android:layout_width">@dimen/top_button_size</item>
+        <item name="android:layout_height">@dimen/top_button_size</item>
+    </style>
+
+    <style name="DialogButton" parent="RectangleFlatButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:paddingStart">@dimen/add_dialog_button_padding_horizontal</item>
+        <item name="android:paddingEnd">@dimen/add_dialog_button_padding_horizontal</item>
+        <item name="android:paddingBottom">@dimen/add_dialog_button_padding_vertical</item>
+        <item name="android:paddingTop">@dimen/add_dialog_button_padding_vertical</item>
+
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
+    </style>
+
+    <style name="InfoTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/white</item>
+
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">marquee</item>
+
+        <item name="android:shadowColor">@android:color/black</item>
+        <item name="android:shadowRadius">20</item>
+    </style>
+
+    <style name="TimingTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Small</item>
+    </style>
+
+    <style name="SeekBarStyle">
+        <item name="dsb_indicatorTextAppearance">@style/IndicatorText</item>
+        <item name="dsb_progressColor">@color/seeker_color_states</item>
+        <item name="dsb_trackColor">@color/white_more_alpha</item>
+        <item name="dsb_rippleColor">@color/dsb_ripple_color_list</item>
+        <item name="dsb_indicatorColor">@color/primary</item>
+        <item name="dsb_indicatorElevation">4dp</item>
+    </style>
+
+    <style name="IndicatorText" parent="android:TextAppearance.Small">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:padding">2dp</item>
+    </style>
+
+    <style name="BottomButton" parent="RoundFlatButton">
+        <item name="android:layout_width">@dimen/bottom_button_size</item>
+        <item name="android:layout_height">@dimen/bottom_button_size</item>
+
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="PlayButton" parent="RoundFlatButton">
+        <item name="android:layout_width">@dimen/play_button_size</item>
+        <item name="android:layout_height">@dimen/play_button_size</item>
+    </style>
+
+    <style name="ListButton" parent="RectangleFlatButton">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">@dimen/nil</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+
+        <!--<item name="android:paddingBottom">@dimen/top_button_margin</item>-->
+        <!--<item name="android:paddingTop">@dimen/top_button_margin</item>-->
+    </style>
+
+    <style name="DialogInstruction">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
+
+        <item name="android:paddingStart">@dimen/add_dialog_text_padding_horizontal</item>
+        <item name="android:paddingEnd">@dimen/add_dialog_text_padding_horizontal</item>
+        <item name="android:paddingTop">@dimen/add_dialog_text_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/add_dialog_text_padding_vertical</item>
+    </style>
+
+    <style name="ErrorDialog" parent="Theme.AppCompat.Dialog"/>
+
+    <style name="PopupDialog" parent="Material.App.Dialog.Simple">
+        <item name="di_inAnimation">@anim/anim_scale_in</item>
+        <item name="di_outAnimation">@anim/anim_scale_out</item>
+    </style>
+</resources>

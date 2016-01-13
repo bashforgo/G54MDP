@@ -1,0 +1,94 @@
+Index: app/src/main/java/hu/devo/bastet/common/AlbumArtStorage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/hu/devo/bastet/common/AlbumArtStorage.java	(date 1449354791000)
++++ app/src/main/java/hu/devo/bastet/common/AlbumArtStorage.java	(revision )
+@@ -48,15 +48,19 @@
+         fill();
+     }
+ 
+-    public AlbumArtStorage(Music m, final Runnable then) {
++    public AlbumArtStorage(Music m, final AsyncTask<Void, Void, Void> then) {
+         this.m = m;
+         m.aas = this;
+         new AsyncTask<Void, Void, Void>() {
+             @Override
+             protected Void doInBackground(Void... params) {
+                 fill();
+-                then.run();
+                 return null;
++            }
++
++            @Override
++            protected void onPostExecute(Void aVoid) {
++                then.execute();
+             }
+         }.execute();
+     }
+Index: app/src/main/java/hu/devo/bastet/service/PlaybackNotificationManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/hu/devo/bastet/service/PlaybackNotificationManager.java	(date 1449354791000)
++++ app/src/main/java/hu/devo/bastet/service/PlaybackNotificationManager.java	(revision )
+@@ -141,6 +141,7 @@
+         protected Action resumeAction;
+         protected ArrayList<Action> actions;
+         protected Builder builder = new Builder(ctx);
++        protected AsyncTask<Void, Void, Void> redoTask;
+ 
+         public BastetNotificationBuilder() {
+             builder
+@@ -178,26 +179,28 @@
+             if (aas != null) {
+                 try {
+                     if (aas.isUri()) {
+-                        Logger.i("loading uri");
+                         icon = Picasso.with(ctx).load(aas.getUri()).get();
+                     } else {
+-                        Logger.i("loading file");
+                         icon = Picasso.with(ctx).load(aas.getFile()).get();
+                     }
+                 } catch (IOException e) {
+-                    Logger.i("loading defaultIcon");
+                     icon = getDefaultIcon();
+                 }
+             } else {
+-                new AlbumArtStorage(m, new Runnable() {
++
++                redoTask = new AsyncTask<Void, Void, Void>() {
++
+                     @Override
+-                    public void run() {
+-                        // TODO: 05/12/2015 race condition
++                    protected Void doInBackground(Void... params) {
+                         Logger.i("redo");
+                         setMusic(m);
++                        if (!isCancelled()) {
+-                        notificationManager.notify(NOTIFICATION_ID, build());
+-                    }
++                            notificationManager.notify(NOTIFICATION_ID, build());
++                        }
+-                });
++                        return null;
++                    }
++                };
++                new AlbumArtStorage(m, redoTask);
+                 icon = getDefaultIcon();
+             }
+ 
+@@ -221,6 +224,11 @@
+         }
+ 
+         public Notification build() {
++            if (redoTask != null) {
++                Logger.i("canceling old notif build");
++                redoTask.cancel(false);
++                redoTask = null;
++            }
+             return builder.build();
+         }
+     }
